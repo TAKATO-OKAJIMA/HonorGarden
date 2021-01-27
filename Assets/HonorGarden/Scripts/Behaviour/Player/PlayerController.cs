@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         gravity = Mathf.Abs(Physics.gravity.y);
+        moveDirection.y = transform.position.y;
     }
 
     // Update is called once per frame
@@ -30,15 +31,22 @@ public class PlayerController : MonoBehaviour
     {
         moveX = Input.GetAxis(horizontal);
         moveZ = Input.GetAxis(vertical);
+        moveY = moveDirection.y;
 
+        moveDirection = new Vector3(moveX, 0, moveZ);
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= speed;
+       
         if (characterController.isGrounded)
         {
-            moveDirection = new Vector3(moveX, 0, moveZ);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
             if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
+                moveDirection.y += jumpSpeed;
         }
+        else
+        {
+            moveDirection.y = moveY;
+        }
+        
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
     }
