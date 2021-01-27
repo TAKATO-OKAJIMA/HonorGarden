@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SuitCollider : MonoBehaviour
 {
+    Suit suit = Suit.HEARTS;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,33 +23,7 @@ public class SuitCollider : MonoBehaviour
         {
             Debug.Log("Collision");
             PlayerStatus playerStatus = collision.gameObject.GetComponent<PlayerStatus>();
-            if(playerStatus.GetSuit() == tag)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("Collision");
-            PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
-            if (playerStatus.GetSuit() == tag)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.tag == "Player")
-        {
-            Debug.Log("Collision");
-            PlayerStatus playerStatus = hit.gameObject.GetComponent<PlayerStatus>();
-            if (playerStatus.GetSuit() == tag)
+            if(playerStatus.GetSuit() == suit.String())
             {
                 gameObject.SetActive(false);
             }

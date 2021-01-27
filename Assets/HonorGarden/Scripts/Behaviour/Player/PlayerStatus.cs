@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private List<string> suits = new List<string>() { "Hearts", "Diamonds", "Speads", "Clubs", "None"};
-    private string nowSuit = "None";
+    private string nowSuit;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        nowSuit = Suit.NONE.String();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(nowSuit);
-    }
-
-    public bool IsSuit(string tag)
-    {
-        return suits.Contains(tag);
     }
 
     public void SetSuit(string suit)

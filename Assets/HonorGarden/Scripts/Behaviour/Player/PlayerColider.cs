@@ -22,14 +22,5 @@ public class PlayerColider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        collisionTag = collider.gameObject.tag;
-        if (playerStatus.IsSuit(collisionTag))
-        {
-            playerStatus.SetSuit(collisionTag);
-        }
-        else if(collisionTag == "Water")
-        {
-            Debug.Log("Water");
-        }
     }
 }

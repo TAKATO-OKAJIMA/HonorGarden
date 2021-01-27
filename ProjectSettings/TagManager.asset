@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Water
-  - Hearts
   - Ground
+  - Card
+  - SuitGimmick
   layers:
   - Default
   - TransparentFX
