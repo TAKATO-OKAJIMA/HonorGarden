@@ -4,50 +4,61 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3.0f;
-    public float jumpSpeed = 8.0f;
-    private float gravity;
-
     private readonly string horizontal = "Horizontal";
     private readonly string vertical = "Vertical";
 
-    private float moveX = 0f;
-    private float moveY = 0f;
-    private float moveZ = 0f;
+    private bool onGround = true;
+    private bool onJumping = false;
 
-    private CharacterController characterController;
-    private Vector3 moveDirection = Vector3.zero;
+    float speed = 2.0f;
+    float jumpForce = 6.0f;
+
+    Vector3 moveVector = Vector3.zero;
+    private Rigidbody _rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        gravity = Mathf.Abs(Physics.gravity.y);
-        moveDirection.y = transform.position.y;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxis(horizontal);
-        moveZ = Input.GetAxis(vertical);
-        moveY = moveDirection.y;
+        
+    }
 
-        moveDirection = new Vector3(moveX, 0, moveZ);
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= speed;
-       
-        if (characterController.isGrounded)
+    void FixedUpdate()
+    {
+        moveVector.x = Input.GetAxis(horizontal) * speed;
+        moveVector.z = Input.GetAxis(vertical) * speed;
+        moveVector.y = _rigidbody.velocity.y;
+
+        if (!onJumping && onGround)
         {
             if (Input.GetButton("Jump"))
-                moveDirection.y += jumpSpeed;
+            {
+                moveVector.y = 1 * jumpForce;
+                //rigidbody.velocity = new Vector3(0, jumpForce, 0);
+                //rigidbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+                //rigidbody.AddForce(moveVector, ForceMode.Impulse);
+                onJumping = true;
+            }
         }
-        else
+        if (_rigidbody.velocity.magnitude < 2.0f)
         {
-            moveDirection.y = moveY;
+            _rigidbody.velocity = moveVector;
+            //rigidbody.AddForce(moveVector.x, moveVector.y, moveVector.z, ForceMode.Impulse);
         }
         
-        moveDirection.y -= gravity * Time.deltaTime;
-        characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+            onJumping = false;
+        }
     }
 }
