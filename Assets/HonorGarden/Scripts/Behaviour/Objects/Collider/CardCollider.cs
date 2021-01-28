@@ -5,12 +5,12 @@ using UnityEngine;
 public class CardCollider : MonoBehaviour
 {
     string collisionTag;
-    Suit suit = Suit.HEARTS;
+    CardSuit cardSuit;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cardSuit = GetComponent<CardSuit>();
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class CardCollider : MonoBehaviour
         if(collisionTag == "Player")
         {
             PlayerStatus playerStatus = collision.gameObject.GetComponent<PlayerStatus>();
-            playerStatus.SetSuit(suit.String());
+            playerStatus.SetSuit(cardSuit.GetSuit());
         }
     }
 
@@ -37,7 +37,7 @@ public class CardCollider : MonoBehaviour
         if (collisionTag == "Player")
         {
             PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
-            playerStatus.SetSuit(suit.String());
+            playerStatus.SetSuit(cardSuit.GetSuit());
         }
     }
 }

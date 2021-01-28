@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SuitCollider : MonoBehaviour
+public class SuitGimmickCollider : MonoBehaviour
 {
-    Suit suit = Suit.HEARTS;
+    CardSuit cardSuit;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cardSuit = GetComponent<CardSuit>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class SuitCollider : MonoBehaviour
         {
             Debug.Log("Collision");
             PlayerStatus playerStatus = collision.gameObject.GetComponent<PlayerStatus>();
-            if(playerStatus.GetSuit() == suit.String())
+            if(playerStatus.GetSuit() == cardSuit.GetSuit())
             {
                 gameObject.SetActive(false);
             }

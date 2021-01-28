@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-enum Suit : int
+public enum Suit : int
 {
     NONE = 0,
     HEARTS,
