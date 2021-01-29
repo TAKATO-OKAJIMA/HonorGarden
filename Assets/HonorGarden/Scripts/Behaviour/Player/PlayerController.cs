@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         moveVector.z = Input.GetAxis(vertical) * speed;
         moveVector.y = _rigidbody.velocity.y;
 
-        if (!onJumping && onGround)
+        if (!onJumping)
         {
             if (Input.GetButton("Jump"))
             {
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {

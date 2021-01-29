@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Card
   - SuitGimmick
+  - Crystal
   layers:
   - Default
   - TransparentFX
