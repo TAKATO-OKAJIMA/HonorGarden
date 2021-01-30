@@ -14,7 +14,7 @@ static class SuitString
 {
     private static string[] suits = { "None", "Hearts,", "Diamonds", "Speads", "Clubs" };
 
-    public static string String(this Suit suit)
+    public static string ToString(this Suit suit)
     {
         return suits[(int)suit];
     }

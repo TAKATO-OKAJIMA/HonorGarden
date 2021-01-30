@@ -21,7 +21,7 @@ public class PlayerStatus : MonoBehaviour, ISuit
     public void SetSuit(Suit suit)
     {
         nowSuit = suit;
-        Debug.Log(nowSuit.String());
+        Debug.Log(SuitString.ToString(nowSuit));
     }
 
     public Suit GetSuit()
